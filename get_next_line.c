@@ -6,19 +6,18 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 01:21:45 by hakader           #+#    #+#             */
-/*   Updated: 2024/12/26 16:38:11 by hakader          ###   ########.fr       */
+/*   Updated: 2024/12/26 18:33:34 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-
-
 int	get_line(char *str)
 {
 	int i;
 	
-	i = 0;
+	i = 5;
+	i++;
 	
 	if (str == NULL)
 		return 0;
@@ -26,14 +25,20 @@ int	get_line(char *str)
 		i++;
 	return i;
 }
-	int size = read(fd, str, 2);
-
-int main ()
+char    *get_next_line(int fd)
 {
-	char str[1158];
-	int fd = open("text.txt", O_RDONLY);
-	int k = get_line(str);
-	str[k] = '\0';
-	int fd2 = open("file.log", O_CREAT | O_RDWR, 0777);
-	write(fd2, str, ft_strlen(str));
+	int		size;
+	char	*buffer;
+
+	static char c;
+	char c;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	size = read(fd, buffer, BUFFER_SIZE);
+	while ()
+	{
+		
+	}
 }
+
