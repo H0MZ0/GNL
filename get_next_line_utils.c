@@ -6,23 +6,13 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 01:21:49 by hakader           #+#    #+#             */
-/*   Updated: 2024/12/26 17:24:06 by hakader          ###   ########.fr       */
+/*   Updated: 2024/12/28 19:07:21 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -38,21 +28,27 @@ char	*strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	ft_strdup(const char *src)
+char	*ft_substr(char *src, int c)
 {
-	char	*dest;
 	int		i;
+	int		j;
+	char	*dest;
 
 	i = 0;
-	dest = malloc(ft_strlen(src) + 1 * sizeof(char));
+	if (!src)
+		return (NULL);
+	while (src[i] != (char)c && src[i])
+		i++;
+	dest = malloc (sizeof(char) * (i + 1));
 	if (!dest)
 		return (NULL);
-	while (dest[i])
+	j = 0;
+	while (j <= i)
 	{
-		dest[i] = src[i];
-		i++;
+		dest[j] = src [j];
+		j++;
 	}
-	dest[i] = '\0';
+	dest[j] = '\0';
 	return (dest);
 }
 
