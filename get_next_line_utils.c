@@ -6,51 +6,38 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 01:21:49 by hakader           #+#    #+#             */
-/*   Updated: 2024/12/28 19:07:21 by hakader          ###   ########.fr       */
+/*   Updated: 2024/12/29 18:21:01 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (NULL);
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	ft_chrlen(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == c)
-			return ((char *)c);
+			return (i);
 		i++;
 	}
-	return (NULL);
+	return (-1);
 }
 
-char	*ft_substr(char *src, int c)
-{
-	int		i;
-	int		j;
-	char	*dest;
-
-	i = 0;
-	if (!src)
-		return (NULL);
-	while (src[i] != (char)c && src[i])
-		i++;
-	dest = malloc (sizeof(char) * (i + 1));
-	if (!dest)
-		return (NULL);
-	j = 0;
-	while (j <= i)
-	{
-		dest[j] = src [j];
-		j++;
-	}
-	dest[j] = '\0';
-	return (dest);
-}
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -79,4 +66,54 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		j++;
 	}
 	return (alloc);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*sub;
+	int		i;
+	size_t	s_len;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+	{
+		sub = malloc(sizeof(char) * 1);
+		sub[0] = '\0';
+		return (sub);
+	}
+	if (start + len > s_len)
+		len = s_len - start;
+	sub = malloc(len + 1);
+	if (!sub)
+		return (NULL);
+	i = 0;
+	while (start < len + 1)
+	{
+		sub[i] = s[start];
+		i++;
+	}
+	return (sub);
+}
+
+// (strdup work)
+char	*ft_strdup(const char *src)
+{
+	int		size;
+	int		i;
+	char	*dest;
+
+	size = ft_strlen(src);
+	dest = (char *)malloc(size * sizeof(char) + 1);
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[size] = '\0';
+	return (dest);
 }
