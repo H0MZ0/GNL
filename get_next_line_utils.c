@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 09:58:10 by sjoukni           #+#    #+#             */
-/*   Updated: 2024/12/30 10:27:18 by hakader          ###   ########.fr       */
+/*   Updated: 2024/12/30 17:13:00 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	j;
 	char	*result;
 
+	if (!s1 && !s2)
+		return (NULL);
 	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!result)
 		return (ft_strdup(""));
