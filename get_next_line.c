@@ -6,19 +6,18 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:26:11 by hakader           #+#    #+#             */
-/*   Updated: 2024/12/29 18:03:10 by hakader          ###   ########.fr       */
+/*   Updated: 2024/12/30 12:50:02 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_line(int fd)
+char	*get_line(int fd, char *line)
 {
 	int			bytes;
 	char		*buffer;
-	char		*tmp;
 	char		*full_buffer;
-	static char	*line;
+	static char		*tmp;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	while (ft_strchr(buffer, '\n') == -1)
@@ -35,21 +34,28 @@ char	*get_line(int fd)
 		full_buffer = ft_strjoin(full_buffer, buffer);
 	}
 	free (buffer);
-	bytes = ft_strchr(full_buffer, '\n');
+	bytes = ft_strchr (full_buffer, '\n');
 	line = ft_substr (full_buffer, 0, bytes);
 	tmp = ft_substr (full_buffer, bytes + 1, ft_strlen(full_buffer));
 	return (line);
 }
+char	*get_next(int fd, char *next)
+{
+	char	*buffer;
 
+	if (next == NULL)
+		get_line(next);
+	
+}
 char	*get_next_line(int fd)
 {
-	char		*line;
-	static char	*buffer;
+	char	*line;
 	
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = get_line(fd);
-	return (buffer);
+	get_line(fd, line);
+	line = get_line(fd, line);
+	return (line);
 }
 
 int main()
@@ -59,6 +65,11 @@ int main()
 	if (fd < 0)
 		return(0);
 	str = get_next_line (fd);
-	printf("%s", str);
+	printf("%s\n", str);
 	close (fd);
 }
+// if (tmp != null)
+// {
+// 	size = ft_strlen (tmp);
+// 	full_buffer = ft_substr (tmp, 0, size)
+// }
