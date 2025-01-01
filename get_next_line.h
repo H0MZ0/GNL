@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 01:21:53 by hakader           #+#    #+#             */
-/*   Updated: 2024/12/30 09:40:28 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/01 18:39:56 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 15
 # endif
 
+char	*ft_strdup(const char *s1);
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *str);
 int 	ft_chrlen(const char *s, int c);
