@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:26:11 by hakader           #+#    #+#             */
-/*   Updated: 2025/01/02 19:16:04 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/02 20:14:12 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ char	*get_next_line(int fd)
 	line = get_line(fd, line);
 	return (line);
 }
-int main()
-{
-	char	*str;
-	int fd = open("text.txt", O_RDONLY);
+// int main()
+// {
+// 	char	*str;
+// 	int fd = open("text.txt", O_RDONLY);
 
-	while ((str = get_next_line(fd)))
-	{
-		printf("%s", str);
-		free (str);
-	}
-	close (fd);
-}
+// 	while ((str = get_next_line(fd)))
+// 	{
+// 		printf("%s", str);
+// 		free (str);
+// 	}
+// 	close (fd);
+// }
