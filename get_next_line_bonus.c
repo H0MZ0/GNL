@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 20:16:02 by hakader           #+#    #+#             */
-/*   Updated: 2025/01/02 20:17:54 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/03 00:54:57 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,22 @@ char	*get_line(int fd, char *line)
 	ssize_t		bytes;
 	char		*buffer;
 	char		*full_buffer;
-	static char	*tmp;
+	static char	*tmp[__FD_MAX__];
 
-	full_buffer = ft_strdup(tmp);
+	full_buffer = ft_strdup(tmp[fd]);
 	buffer = malloc(BUFFER_SIZE + 1);
 	buffer[BUFFER_SIZE] = '\0';
 	while (ft_strchr(buffer, '\n') == -1)
 	{
 		bytes = read (fd, buffer, BUFFER_SIZE);
 		if (bytes < 0)
-			return (ft_free (&tmp), ft_free (&buffer), NULL);
+			return (ft_free (&tmp[fd]), ft_free (&buffer), NULL);
 		else if (bytes == 0)
 			break ;
 		full_buffer = ft_strjoin(full_buffer, buffer);
 	}
-	line = ft_handle(full_buffer, line, tmp, buffer);
+	line = ft_handle(full_buffer, line, tmp[fd], buffer);
+	tmp[fd] = ft_strdup(full_buffer);
 	return (line);
 }
 
