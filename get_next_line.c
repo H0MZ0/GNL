@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:26:11 by hakader           #+#    #+#             */
-/*   Updated: 2025/01/02 02:45:42 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/02 19:16:04 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@ void	ft_free(char **str)
 		free(*str);
 		*str = NULL;
 	}
+}
+
+char	*ft_handle(char *full_buffer, char *line, char *tmp, char *buffer)
+{
+	int	bytes;
+
+	if (ft_strchr(full_buffer, '\0') == -1)
+	{
+		line = ft_strjoin(line, tmp);
+		line = ft_strjoin(line, full_buffer);
+		return (ft_free(&tmp), ft_free (&buffer), ft_free (&full_buffer), line);
+	}
+	else
+	{
+		bytes = ft_strchr (full_buffer, '\n');
+		line = ft_substr (full_buffer, 0, bytes + 1);
+		tmp = ft_substr (full_buffer, bytes + 1,
+				ft_strlen(full_buffer) - bytes - 1);
+	}
+	return (ft_free (&buffer), line);
 }
 
 char	*get_line(int fd, char *line)
@@ -40,20 +60,8 @@ char	*get_line(int fd, char *line)
 			break ;
 		full_buffer = ft_strjoin(full_buffer, buffer);
 	}
-	if (ft_strchr(full_buffer, '\0') == -1)
-	{
-		line = ft_strjoin(line, tmp);
-		line = ft_strjoin(line, full_buffer);
-		return (ft_free(&tmp), ft_free (&buffer), ft_free (&full_buffer), line);
-	}
-	else
-	{
-		bytes = ft_strchr (full_buffer, '\n');
-		line = ft_substr (full_buffer, 0, bytes + 1);
-		tmp = ft_substr (full_buffer, bytes + 1,
-				ft_strlen(full_buffer) - bytes - 1);
-	}
-	return (ft_free (&buffer), line);
+	line = ft_handle(full_buffer, line, tmp, buffer);
+	return (line);
 }
 
 char	*get_next_line(int fd)
