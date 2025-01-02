@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:26:11 by hakader           #+#    #+#             */
-/*   Updated: 2025/01/02 01:18:39 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/02 01:52:19 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,37 @@ void	ft_free(char **str)
 
 char	*get_line(int fd, char *line)
 {
-	ssize_t			bytes;
+	ssize_t		bytes;
 	char		*buffer;
 	char		*full_buffer;
 	static char	*tmp;
 
 	full_buffer = ft_strdup(tmp);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = malloc(BUFFER_SIZE + 1);
 	buffer[BUFFER_SIZE] = '\0';
 	while (ft_strchr(buffer, '\n') == -1)
 	{
 		bytes = read (fd, buffer, BUFFER_SIZE);
 		if (bytes < 0)
 			return (ft_free (&tmp), ft_free (&buffer), NULL);
-		if (bytes == 0)
-			break;
+		else if (bytes == 0)
+			break ;
 		full_buffer = ft_strjoin(full_buffer, buffer);
 	}
-	free (buffer);
 	if (ft_strchr(full_buffer, '\0') == -1)
 	{
 		line = ft_strjoin(line, tmp);
 		line = ft_strjoin(line, full_buffer);
-		return (line);
+		return (ft_free(&tmp), line);
 	}
 	else
 	{
 		bytes = ft_strchr (full_buffer, '\n');
 		line = ft_substr (full_buffer, 0, bytes + 1);
-		tmp = ft_substr (full_buffer, bytes + 1, ft_strlen(full_buffer) - bytes - 1);
+		tmp = ft_substr (full_buffer, bytes + 1,
+				ft_strlen(full_buffer) - bytes - 1);
 	}
-	return (ft_free (&full_buffer), line);
+	return (ft_free (&full_buffer), ft_free (&buffer), line);
 }
 
 char	*get_next_line(int fd)
