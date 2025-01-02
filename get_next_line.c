@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 17:26:11 by hakader           #+#    #+#             */
-/*   Updated: 2025/01/02 01:52:19 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/02 02:17:13 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_line(int fd, char *line)
 	{
 		line = ft_strjoin(line, tmp);
 		line = ft_strjoin(line, full_buffer);
-		return (ft_free(&tmp), line);
+		return (ft_free(&tmp), ft_free (&buffer), ft_free (&full_buffer), line);
 	}
 	else
 	{
@@ -53,7 +53,7 @@ char	*get_line(int fd, char *line)
 		tmp = ft_substr (full_buffer, bytes + 1,
 				ft_strlen(full_buffer) - bytes - 1);
 	}
-	return (ft_free (&full_buffer), ft_free (&buffer), line);
+	return (ft_free (&buffer), line);
 }
 
 char	*get_next_line(int fd)
