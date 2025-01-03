@@ -6,7 +6,7 @@
 /*   By: hakader <hakader@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 20:16:21 by hakader           #+#    #+#             */
-/*   Updated: 2025/01/02 20:17:30 by hakader          ###   ########.fr       */
+/*   Updated: 2025/01/03 01:00:45 by hakader          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
+# endif
+
+# ifndef __FD_MAX__
+#  define __FD_MAX__ 1024
 # endif
 
 void	ft_free(char **str);
